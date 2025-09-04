@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Offsets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6f42c1, #9b59b6);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    perspective: 1000px; /* 3D effect */
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 4rem;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+a.button {
+    text-decoration: none;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+a.button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.discord-button {
+    background-color: #7289da;
+    color: white;
+}
+
+.discord-button:hover {
+    background-color: #5b6eae;
+}
+
+.credits {
+    margin-top: 50px;
+    font-size: 1.1rem;
+    opacity: 0.85;
+    line-height: 1.6;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+.nodiscordrn {
+    margin-top: 20px;
+    font-size: 1rem;
+    opacity: 0.8;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+/* Snowflake styles */
+.snowflake {
+    position: fixed;
+    top: -10px; /* start above the viewport */
+    color: #fff;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<h1>Roblox Offsets</h1>
+<div class="button-container">
+    <a href="https://pastebin.com/raw/SxtQXckc" target="_blank" class="button">Offsets</a>
+    <a href="#nodiscordrn" target="_blank" class="button discord-button">Join Discord</a>
+</div>
+
+<div class="credits">
+    <p>Website made with ❤️ by Pasta</p>
+    <p>Special thanks to all contributors and friends who made this possible!</p>
+</div>
+
+<div class="nodiscordrn">
+    <p><b>Note: Discord server Has Not Been Made Right Now.</b></p>
+    <p><b>Might Make One Soon.</b></p>
+</div>
+
+<script>
+// Create snowflakes that appear mid-fall
+const snowflakeCount = 40;
+for (let i = 0; i < snowflakeCount; i++) {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.innerHTML = '❄';
+
+    const startX = Math.random() * 100; // vw
+    const size = Math.random() * 16 + 8;
+    const duration = Math.random() * 10 + 5;
+
+    snowflake.style.left = startX + 'vw';
+    snowflake.style.fontSize = size + 'px';
+    snowflake.style.opacity = Math.random();
+
+    snowflake.style.animationDuration = duration + 's';
+    // Negative delay makes it already partway through the fall
+    snowflake.style.animationDelay = `-${Math.random() * duration}s`;
+
+    snowflake.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(snowflake);
+}
+
+// 3D mouse parallax
+const h1 = document.querySelector('h1');
+const buttons = document.querySelector('.button-container');
+const credits = document.querySelector('.credits');
+const note = document.querySelector('.nodiscordrn');
+
+document.addEventListener('mousemove', e => {
+    const x = (window.innerWidth / 2 - e.clientX) / 40;
+    const y = (window.innerHeight / 2 - e.clientY) / 40;
+
+    h1.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    buttons.style.transform = `rotateY(${x/2}deg) rotateX(${y/2}deg)`;
+    credits.style.transform = `rotateY(${x/3}deg) rotateX(${y/3}deg)`;
+    note.style.transform = `rotateY(${x/3}deg) rotateX(${y/3}deg)`;
+});
+</script>
+
+</body>
+</html>
